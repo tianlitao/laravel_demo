@@ -13,7 +13,7 @@
                             <tr class="row">
                                 <th class="col-lg-4">Content</th>
                                 <th class="col-lg-2">User</th>
-                                <th class="col-lg-4">Page</th>
+                                <th class="col-lg-4">Page/article</th>
                                 <th class="col-lg-1">编辑</th>
                                 <th class="col-lg-1">删除</th>
                             </tr>
@@ -33,15 +33,24 @@
                                         {{ $comment->email }}
                                     </td>
                                     <td class="col-lg-4">
-                                        <a href="{{ URL('pages/'.$comment->page_id) }}" target="_blank">
-                                            {{ App\Page::find($comment->page_id)->title }}
-                                        </a>
+                                        @if($comment->page_id != 0)
+                                            <a href="{{ URL('pages/'.$comment->page_id) }}" target="_blank">
+                                                {{ App\Page::find($comment->page_id)->title }}
+                                            </a>
+                                        @else
+                                            <a href="{{ URL('articles/'.$comment->article_id) }}" target="_blank">
+                                                {{ App\Article::find($comment->article_id)->title }}
+                                            </a>
+                                        @endif
+
                                     </td>
                                     <td class="col-lg-1">
-                                        <a href="{{ URL('admin/comments/'.$comment->id.'/edit') }}" class="btn btn-success">编辑</a>
+                                        <a href="{{ URL('admin/comments/'.$comment->id.'/edit') }}"
+                                           class="btn btn-success">编辑</a>
                                     </td>
                                     <td class="col-lg-1">
-                                        <form action="{{ URL('admin/comments/'.$comment->id) }}" method="POST" style="display: inline;">
+                                        <form action="{{ URL('admin/comments/'.$comment->id) }}" method="POST"
+                                              style="display: inline;">
                                             <input name="_method" type="hidden" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <button type="submit" class="btn btn-danger">删除</button>

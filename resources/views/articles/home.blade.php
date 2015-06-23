@@ -6,13 +6,13 @@
         <div style="padding: 5px; font-size: 16px;">{{ Inspiring::quote() }}</div>
     </div>
     <hr>
-    <a href="{{ URL('articles') }}" class="btn ">article页</a>
+    <a href="{{ URL('') }}" class="btn ">page页</a>
     <div id="content">
         <ul>
             @foreach ($pages as $page)
                 <li style="margin: 50px 0;">
                     <div class="title">
-                        <a href="{{ URL('pages/'.$page->id) }}">
+                        <a href="{{ URL('articles/'.$page->id) }}">
                             <h4>{{ $page->title }}</h4>
                         </a>
                     </div>
